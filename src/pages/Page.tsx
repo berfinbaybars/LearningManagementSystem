@@ -1,13 +1,148 @@
-import { IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import { IonCard, IonIcon,IonButton, IonGrid, IonRow, IonCol, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent ,IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import React from 'react';
 import { useParams } from 'react-router';
-import ExploreContainer from '../components/ExploreContainer';
+import Announcements from '../components/Announcements';
+import Login from '../components/Login';
+import Notification from '../components/Notification';
 import './Page.css';
+import { heartOutline, heart } from 'ionicons/icons';
 
 const Page: React.FC = () => {
 
   const { name } = useParams<{ name: string; }>();
+  if(name === 'Announcements'){
+    return (
+      <IonPage>
+      <IonHeader>
+        <IonToolbar>
+          <IonButtons slot="start">
+            <IonMenuButton />
+          </IonButtons>
+          <IonTitle>{name}</IonTitle>
+        </IonToolbar>
+      </IonHeader>
 
+      <IonContent>
+        <IonHeader collapse="condense">
+          <IonToolbar>
+            <IonTitle size="large">{name}</IonTitle>
+          </IonToolbar>
+        </IonHeader>
+        <Announcements />
+        <Announcements />
+        <Announcements />
+        <Announcements />
+      </IonContent>
+    </IonPage>
+    );
+  }
+  else if(name === "Login"){
+    return (
+      <IonPage>
+      <IonHeader>
+        <IonToolbar>
+          <IonButtons slot="start">
+            <IonMenuButton />
+          </IonButtons>
+          <IonTitle>{name}</IonTitle>
+        </IonToolbar>
+      </IonHeader>
+
+      <IonContent>
+        <IonHeader collapse="condense">
+          <IonToolbar>
+            <IonTitle size="large">{name}</IonTitle>
+          </IonToolbar>
+        </IonHeader>
+        <Login />
+      </IonContent>
+    </IonPage>
+    );
+  }
+  else if(name === 'Notifications'){
+    return (
+      <IonPage>
+      <IonHeader>
+        <IonToolbar>
+          <IonButtons slot="start">
+            <IonMenuButton />
+          </IonButtons>
+          <IonTitle>{name}</IonTitle>
+        </IonToolbar>
+      </IonHeader>
+
+      <IonContent>
+        <IonHeader collapse="condense">
+          <IonToolbar>
+            <IonTitle size="large">{name}</IonTitle>
+          </IonToolbar>
+        </IonHeader>
+        <Notification />
+        <IonCard>
+        <IonCardHeader>
+          <IonCardSubtitle>Homework</IonCardSubtitle>
+          <IonCardTitle>Math 101</IonCardTitle>
+        </IonCardHeader>
+
+        <IonCardContent>
+          Your homework is due to tomorrow!
+        </IonCardContent>
+      </IonCard>
+      </IonContent>
+    </IonPage>
+    );
+  }
+  else if(name === 'Classes'){
+    return (
+      <IonPage>
+      <IonHeader>
+        <IonToolbar>
+          <IonButtons slot="start">
+            <IonMenuButton />
+          </IonButtons>
+          <IonTitle>{name}</IonTitle>
+        </IonToolbar>
+      </IonHeader>
+
+      <IonContent>
+        <IonHeader collapse="condense">
+          <IonToolbar>
+            <IonTitle size="large">{name}</IonTitle>
+          </IonToolbar>
+        </IonHeader>
+      <IonGrid>
+        <IonRow>
+          <IonCol size="6">
+            <IonCard>
+            <IonButton class="ion-float-right" color="light"><IonIcon slot="icon-only" color="danger" icon={heartOutline}></IonIcon></IonButton>
+
+              <IonCardHeader>
+                <IonCardTitle>MATH 101 </IonCardTitle>
+              </IonCardHeader>
+              <IonCardContent>
+                Intro to Calculus
+              </IonCardContent>
+            </IonCard>
+          </IonCol>
+          <IonCol size="6">
+              <IonCard>
+              <IonButton class="ion-float-right" color="light"><IonIcon slot="icon-only" color="danger" icon={heartOutline}></IonIcon></IonButton>
+              <IonCardHeader>
+                <IonCardTitle>PHYS 101</IonCardTitle>
+              </IonCardHeader>
+              <IonCardContent>
+                Introduction to Physics
+              </IonCardContent>
+          </IonCard>
+          </IonCol>
+        </IonRow>
+      </IonGrid>
+        
+      
+      </IonContent>
+    </IonPage>
+    );
+  }
   return (
     <IonPage>
       <IonHeader>
@@ -25,7 +160,6 @@ const Page: React.FC = () => {
             <IonTitle size="large">{name}</IonTitle>
           </IonToolbar>
         </IonHeader>
-        <ExploreContainer name={name} />
       </IonContent>
     </IonPage>
   );

@@ -1,0 +1,10 @@
+#loginlist{
+    margin: auto;
+    text-align: center;
+    width: 60%;
+    margin-top: 35px;
+}
+
+#loginlist ion-item {
+    margin-bottom: 10px;
+}
