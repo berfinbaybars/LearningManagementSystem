@@ -8,11 +8,12 @@ import {
   IonMenu,
   IonMenuToggle,
   IonNote,
+  IonButton,
 } from '@ionic/react';
 
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import { alert, alertCircleOutline,libraryOutline, personCircleOutline, mailOutline, paperPlaneOutline, paperPlaneSharp } from 'ionicons/icons';
+import { alert, alertCircleOutline,libraryOutline, mailOutline, personCircleOutline, personAddOutline } from 'ionicons/icons';
 import './Menu.css';
 
 interface AppPage {
@@ -22,35 +23,80 @@ interface AppPage {
   title: string;
 }
 
-const appPages: AppPage[] = [
-  {
-    title: 'Login',
-    url: '/page/Login',
-    iosIcon: personCircleOutline,
-    mdIcon: personCircleOutline
-  },
-  {
-    title: 'Announcements',
-    url: '/page/Announcements',
-    iosIcon: alertCircleOutline,
-    mdIcon: alert
-  },
-  {
-    title: 'Notifications',
-    url: '/page/Notifications',
-    iosIcon: mailOutline,
-    mdIcon: mailOutline
-  },
-  {
-    title: 'Classes',
-    url: '/page/Classes',
-    iosIcon: libraryOutline,
-    mdIcon: libraryOutline
-  },
-];
+const appPages: AppPage[] = [];
+let hide = false
+let logindata = sessionStorage.getItem("type");
+if(!logindata){
+  hide = true
+  appPages.push(
+    {
+      title: 'Register',
+      url: '/Register',
+      iosIcon: personAddOutline,
+      mdIcon: personAddOutline
+    },
+    {
+      title: 'Login',
+      url: '/Login',
+      iosIcon: personCircleOutline,
+      mdIcon: personCircleOutline
+    },
+  )
+}
+
+if(logindata === "teacher"){
+  appPages.push(
+    {
+      title: 'Announcements',
+      url: '/page/Announcements',
+      iosIcon: alertCircleOutline,
+      mdIcon: alert
+    },
+    {
+      title: 'Notifications',
+      url: '/page/Notifications',
+      iosIcon: mailOutline,
+      mdIcon: mailOutline
+    },
+    {
+      title: 'Classes',
+      url: '/page/Classes',
+      iosIcon: libraryOutline,
+      mdIcon: libraryOutline
+    },
+  )
+}
+
+if(logindata === "student"){
+  appPages.push(
+    {
+      title: 'Announcements',
+      url: '/page/Announcements',
+      iosIcon: alertCircleOutline,
+      mdIcon: alert
+    },
+    {
+      title: 'Notifications',
+      url: '/page/Notifications',
+      iosIcon: mailOutline,
+      mdIcon: mailOutline
+    },
+    {
+      title: 'Classes',
+      url: '/page/Classes',
+      iosIcon: libraryOutline,
+      mdIcon: libraryOutline
+    },
+  )
+}
+
 
 const Menu: React.FC = () => {
   const location = useLocation();
+  const logout = () => {
+    sessionStorage.removeItem("type");
+    window.location.href = "http://localhost:8100/Login"
+  }
 
   return (
     <IonMenu contentId="main" type="overlay">
@@ -69,6 +115,7 @@ const Menu: React.FC = () => {
             );
           })}
         </IonList>
+        <IonButton color="danger" onClick={logout} hidden={hide}>Logout</IonButton>
       </IonContent>
     </IonMenu>
   );

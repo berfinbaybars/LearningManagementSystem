@@ -2,12 +2,18 @@ import { IonCard, IonIcon,IonButton, IonGrid, IonRow, IonCol, IonCardHeader, Ion
 import React from 'react';
 import { useParams } from 'react-router';
 import Announcements from '../components/Announcements';
-import Login from '../components/Login';
 import Notification from '../components/Notification';
 import './Page.css';
-import { heartOutline, heart } from 'ionicons/icons';
+import { heartOutline } from 'ionicons/icons';
 
 const Page: React.FC = () => {
+
+  let logindata = sessionStorage.getItem("type");
+    if(!logindata){
+      console.log("Access denied")
+      window.location.href ="http://localhost:8100/Login"
+    }
+    console.log("Access granted")
 
   const { name } = useParams<{ name: string; }>();
   if(name === 'Announcements'){
@@ -32,29 +38,6 @@ const Page: React.FC = () => {
         <Announcements />
         <Announcements />
         <Announcements />
-      </IonContent>
-    </IonPage>
-    );
-  }
-  else if(name === "Login"){
-    return (
-      <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonButtons slot="start">
-            <IonMenuButton />
-          </IonButtons>
-          <IonTitle>{name}</IonTitle>
-        </IonToolbar>
-      </IonHeader>
-
-      <IonContent>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">{name}</IonTitle>
-          </IonToolbar>
-        </IonHeader>
-        <Login />
       </IonContent>
     </IonPage>
     );
