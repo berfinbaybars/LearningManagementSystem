@@ -1,6 +1,7 @@
 import React from 'react';
 import { IonList, IonItem, IonLabel, IonInput, IonButton } from '@ionic/react';
 import './Login.css';
+import users from '../data/users.json';
 
 const Register: React.FC = () => {
   let email : any;

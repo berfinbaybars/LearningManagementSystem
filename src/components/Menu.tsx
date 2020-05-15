@@ -47,20 +47,8 @@ if(!logindata){
 if(logindata === "teacher"){
   appPages.push(
     {
-      title: 'Announcements',
-      url: '/page/Announcements',
-      iosIcon: alertCircleOutline,
-      mdIcon: alert
-    },
-    {
-      title: 'Notifications',
-      url: '/page/Notifications',
-      iosIcon: mailOutline,
-      mdIcon: mailOutline
-    },
-    {
-      title: 'Classes',
-      url: '/page/Classes',
+      title: 'Lessons',
+      url: '/page/Lessons',
       iosIcon: libraryOutline,
       mdIcon: libraryOutline
     },
@@ -84,6 +72,12 @@ if(logindata === "student"){
     {
       title: 'Classes',
       url: '/page/Classes',
+      iosIcon: libraryOutline,
+      mdIcon: libraryOutline
+    },
+    {
+      title: 'Notes',
+      url: '/page/Notes',
       iosIcon: libraryOutline,
       mdIcon: libraryOutline
     },

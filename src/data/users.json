@@ -1,0 +1,26 @@
+{
+    "users": [
+        {
+            "email": "teacher@gmail.com",
+            "password": "123",
+            "type": "teacher"
+        },
+        {
+            "email": "student@gmail.com",
+            "password": "123",
+            "type": "student",
+            "notes": [
+                {
+                    "class": "MATH101",
+                    "note": "asdasdsa"
+                },
+                {
+                    "class": "PHYS101",
+                    "note": "asdasdsa"
+                }
+            ]
+        }
+    ]
+}
+
+

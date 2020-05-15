@@ -1,35 +1,30 @@
 import React from 'react';
 import { IonList, IonItem, IonLabel, IonInput, IonButton } from '@ionic/react';
 import './Login.css';
+import users from "../data/users.json";
 
 let email : any;
 let password : any;
 
-const teacher = {
-  email: "teacher@gmail.com",
-  password: "123"
-}
-const student = {
-  email: "student@gmail.com",
-  password: "123"
-}
-
 const check = () => {
+  users.users.map(user => {
+    if(user.email === email && user.password === password){
+      sessionStorage.setItem("type",user.type);
+      sessionStorage.setItem("email", user.email);
+      if(user.type === "teacher"){
+        window.location.href = "http://localhost:8100/page/Lessons"
+        
+      }
+      if(user.type === "student"){
+        window.location.href = "http://localhost:8100/page/Announcements"
+        console.log("Student Login")
+      }
+    }
+    else {
+      console.log("User is not found")
+    }
   
-  if(email === teacher.email && password === teacher.password){
-    sessionStorage.setItem("type","teacher");
-    console.log("Teacher Login");
-    window.location.href = "http://localhost:8100/page/Announcements"
-  }
-  else if(email === student.email && password === student.password){
-    sessionStorage.setItem("type","student");
-    window.location.href = "http://localhost:8100/page/Announcements"
-    console.log("Student Login")
-  }
-  else {
-    console.log("User is not found")
-  }
-
+  })
 }
 
 const Login: React.FC = () => {
