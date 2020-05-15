@@ -1,5 +1,5 @@
 import React from 'react';
-import { IonCard, IonCardHeader, IonCardTitle, IonCardContent } from '@ionic/react';
+import { IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonContent } from '@ionic/react';
 import users from '../data/users.json';
 
 const Notes: React.FC = () => {
@@ -17,17 +17,25 @@ const Notes: React.FC = () => {
         }
     })
 
-    
     return (
-        <IonCard >
-            <IonCardHeader>
-            <IonCardTitle>{notes[0].class}</IonCardTitle>
-            </IonCardHeader>
-
-            <IonCardContent>
+        <IonContent>
+            {notes.map(note => {
+                return(
+                    <IonCard >
+                    <IonCardHeader>
+                    <IonCardTitle>{note.class}</IonCardTitle>
+                    </IonCardHeader>
             
-            </IonCardContent>
-        </IonCard>  
+                    <IonCardContent>
+                        {note.note}
+                    </IonCardContent>
+                </IonCard>      
+                )
+            })}
+            
+        </IonContent>
+        
+        
     )
   
 };
