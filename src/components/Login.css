@@ -8,3 +8,12 @@
 #loginlist ion-item {
     margin-bottom: 10px;
 }
+
+#addButton {
+    width: 100%;
+    margin: auto;
+}
+
+#fav_btn {
+    margin: auto;
+}
