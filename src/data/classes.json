@@ -1,0 +1,16 @@
+{
+    "classes": [
+        {
+            "name":"MATH101",
+            "desc":"Introduction to Calculus"
+        },
+        {
+            "name":"PHYS101",
+            "desc":"Introduction to Physics"
+        },
+        {
+            "name":"CMPE150",
+            "desc":"Introduction to Computing"
+        }
+    ]
+}
