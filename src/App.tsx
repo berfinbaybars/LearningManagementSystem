@@ -24,6 +24,7 @@ import '@ionic/react/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 import LoginPages from './pages/LoginPages';
+import LessonPages from './pages/LessonPages'
 
 const App: React.FC = () => {
 
@@ -34,6 +35,7 @@ const App: React.FC = () => {
           <Menu />
           <IonRouterOutlet id="main">
             <Route path="/page/:name" component={Page} exact />
+            <Route path="/lesson/:name" component={LessonPages}/>
             <Route path="/:name" component={LoginPages}/>
             <Redirect from="/" to="/Login" exact />
           </IonRouterOutlet>

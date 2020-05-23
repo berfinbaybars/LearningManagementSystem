@@ -6,6 +6,8 @@ import Notification from '../components/Notification';
 import './Page.css';
 import { heartOutline } from 'ionicons/icons';
 import Notes from '../components/Notes';
+import Classes from '../components/Classes';
+import Lessons from '../components/Lessons'
 
 const Page: React.FC = () => {
 
@@ -94,34 +96,31 @@ const Page: React.FC = () => {
             <IonTitle size="large">{name}</IonTitle>
           </IonToolbar>
         </IonHeader>
-      <IonGrid>
-        <IonRow>
-          <IonCol size="6">
-            <IonCard>
-            <IonButton class="ion-float-right" color="light"><IonIcon slot="icon-only" color="danger" icon={heartOutline}></IonIcon></IonButton>
+        <Classes/>
+      
+      </IonContent>
+    </IonPage>
+    );
+  }
+  else if(name === 'Lessons'){
+    return (
+      <IonPage>
+      <IonHeader>
+        <IonToolbar>
+          <IonButtons slot="start">
+            <IonMenuButton />
+          </IonButtons>
+          <IonTitle>{name}</IonTitle>
+        </IonToolbar>
+      </IonHeader>
 
-              <IonCardHeader>
-                <IonCardTitle>MATH 101 </IonCardTitle>
-              </IonCardHeader>
-              <IonCardContent>
-                Intro to Calculus
-              </IonCardContent>
-            </IonCard>
-          </IonCol>
-          <IonCol size="6">
-              <IonCard>
-              <IonButton class="ion-float-right" color="light"><IonIcon slot="icon-only" color="danger" icon={heartOutline}></IonIcon></IonButton>
-              <IonCardHeader>
-                <IonCardTitle>PHYS 101</IonCardTitle>
-              </IonCardHeader>
-              <IonCardContent>
-                Introduction to Physics
-              </IonCardContent>
-          </IonCard>
-          </IonCol>
-        </IonRow>
-      </IonGrid>
-        
+      <IonContent>
+        <IonHeader collapse="condense">
+          <IonToolbar>
+            <IonTitle size="large">{name}</IonTitle>
+          </IonToolbar>
+        </IonHeader>
+        <Lessons/>
       
       </IonContent>
     </IonPage>

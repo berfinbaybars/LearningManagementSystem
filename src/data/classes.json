@@ -11,6 +11,10 @@
         {
             "name":"CMPE150",
             "desc":"Introduction to Computing"
+        },
+        {
+            "name":"MATH102",
+            "desc":"Calculus II"
         }
     ]
 }

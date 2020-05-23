@@ -3,7 +3,15 @@
         {
             "email": "teacher@gmail.com",
             "password": "123",
-            "type": "teacher"
+            "type": "teacher",
+            "classes": [
+                {
+                    "name": "MATH101"
+                },
+                {
+                    "name": "MATH102"
+                }
+            ]
         },
         {
             "email": "student@gmail.com",
@@ -12,11 +20,11 @@
             "notes": [
                 {
                     "class": "MATH101",
-                    "note": "asdasdsa"
+                    "note": "Midterm: Chapter 1-2-3"
                 },
                 {
                     "class": "PHYS101",
-                    "note": "asdasdsa"
+                    "note": "Homework"
                 }
             ]
         }
