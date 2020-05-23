@@ -1,0 +1,16 @@
+{
+    "announcements":[
+        {
+            "class": "MATH101",
+            "text": "Midterm will be on 20/04/2013"
+        },
+        {
+            "class": "MATH101",
+            "text": "New Homework Has Added"
+        },
+        {
+            "class": "PHYS101",
+            "text": "Midterm will be on 11/02/2014"
+        }
+    ]
+}
