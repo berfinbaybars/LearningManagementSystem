@@ -1,14 +1,24 @@
 import React from 'react';
 import { IonList, IonItem, IonLabel, IonInput, IonButton } from '@ionic/react';
+import { Plugins } from '@capacitor/core'
 import './Login.css';
-import users from "../data/users.json";
+
+const { Storage } = Plugins
+
 
 let email : any;
 let password : any;
 
-const check = () => {
-  users.users.map(user => {
+
+const check = async() => {
+  const ret = await Storage.get({ key: 'user' });
+  const value = JSON.stringify(ret.value) 
+  const users = JSON.parse(JSON.parse(value));
+  console.log(users)
+  users.map(user => {
     if(user.email === email && user.password === password){
+      /* let tp = JSON.parse(user.type)
+      console.log(tp) */
       sessionStorage.setItem("type",user.type);
       sessionStorage.setItem("email", user.email);
       if(user.type === "teacher"){
@@ -32,11 +42,11 @@ const Login: React.FC = () => {
     <IonList id="loginlist">
       <IonItem >
         <IonLabel position="floating">Email</IonLabel>
-        <IonInput type="text" name="email" onIonChange = {(e) => { email = e.detail.value}} ></IonInput>
+        <IonInput type="text" name="email" onIonChange = {(e) => { email = e.detail.value }} ></IonInput>
       </IonItem>
       <IonItem>
         <IonLabel position="floating">Password</IonLabel>
-        <IonInput type="password" onIonChange = {(e) => { password = e.detail.value}}></IonInput>
+        <IonInput type="password" onIonChange = {(e) => { password = e.detail.value }}></IonInput>
       </IonItem>
       <IonButton onClick={check}>Login</IonButton>
     </IonList>
