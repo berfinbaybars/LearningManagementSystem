@@ -1,7 +1,7 @@
 import React from 'react';
 import { IonList, IonItem, IonLabel, IonInput, IonButton } from '@ionic/react';
-import { Plugins } from '@capacitor/core'
 import './Login.css';
+import { Plugins } from '@capacitor/core'
 
 const { Storage } = Plugins
 
@@ -15,7 +15,7 @@ const check = async() => {
   const value = JSON.stringify(ret.value) 
   const users = JSON.parse(JSON.parse(value));
   console.log(users)
-  users.map(user => {
+  users.forEach(user => {
     if(user.email === email && user.password === password){
       /* let tp = JSON.parse(user.type)
       console.log(tp) */

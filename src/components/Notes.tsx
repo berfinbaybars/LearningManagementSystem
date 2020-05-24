@@ -1,61 +1,91 @@
 import React, { useState } from 'react';
-import { IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonContent, IonButton, IonModal, IonInput, IonList,IonItem, IonLabel, IonTextarea } from '@ionic/react';
-import users from '../data/users.json';
+import { IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonContent, IonButton, IonModal, IonInput, IonList,IonItem, IonLabel } from '@ionic/react';
+import { Plugins } from '@capacitor/core'
+
+const { Storage } = Plugins
+const notes = []
+const email = sessionStorage.getItem("email");
+const getNotes = async() => {
+    let ret = await Storage.get({ key: 'note' })
+    let value = JSON.stringify(ret.value) 
+    let nts = JSON.parse(JSON.parse(value));
+    if(nts){
+        nts.forEach(note => {
+            if(note.email === email){
+                notes.push(note)
+            }
+        })
+    }
+    console.log(notes)
+}
+getNotes()
+
 
 const Notes: React.FC = () => {
-    interface notes {
-        note: string;
-        class: string;
-    }
-    const email = sessionStorage.getItem("email");
-    const notes: notes[] =[]
-    users.users.map(user => {
-        if(user.email === email) {
-            user.notes?.map(note => {
-                notes.push(note)
-            })
-        }
-    })
     const [showModal, setShowModal] = useState(false)
-    let note:string;
-    let noteClass:string;
-    const addNote = () => {
+    let note
+    let noteClass
+    
+    const addNote = async() => {
         setShowModal(false);
         let data = {
-           note,
-           class: noteClass
+            email,
+            note:note,
+            class: noteClass
         }
-        console.log(data)
-        notes.push(data)
-        console.log(notes)
-    }
+        if(notes===null){
+            Storage.set({
+                key:'note',
+                value: JSON.stringify([{
+                email:email,
+                note:note,
+                class:noteClass
+                }])
+            }).then(()=>{
+                console.log('Added')
+            })
+        }else {
+            notes.push(data)
 
+            Storage.set({
+            key:'note',
+            value: JSON.stringify(notes)
+            }).then(()=>{
+                console.log('Added')
+        })
+        }
+        
+    }
+    console.log(notes)
     return (
         <IonContent>
             <IonButton id="addButton" onClick={() => setShowModal(true)}>Add Note</IonButton>
-            {notes.map(note => {
-                return(
-                    <IonCard >
-                    <IonCardHeader>
-                    <IonCardTitle>{note.class}</IonCardTitle>
-                    </IonCardHeader>
             
-                    <IonCardContent>
-                        {note.note}
-                    </IonCardContent>
-                </IonCard>      
-                )
-            })}
+            {   
+                notes.map(note => {
+                    return(
+                        <IonCard >
+                        <IonCardHeader>
+                        <IonCardTitle>{note.class}</IonCardTitle>
+                        </IonCardHeader>
+                
+                        <IonCardContent>
+                            {note.note}
+                        </IonCardContent>
+                    </IonCard>      
+                    )
+                })
+            }
             <IonModal isOpen={showModal}>
                 <IonButton color="danger" onClick={() => setShowModal(false)}>Close</IonButton>
                 <IonList id="loginlist">
                     <IonItem >
                         <IonLabel position="floating">Class</IonLabel>
-                        <IonInput type="text" onIonChange={(e) => { note = JSON.stringify(e.detail.value) }}></IonInput>
+                        <IonInput type="text" onIonChange={(e) => { noteClass = e.detail.value }}></IonInput>
                     </IonItem>
                     <IonItem>
                         <IonLabel position="floating">Note</IonLabel>
-                        <IonInput onIonChange={(e) => { noteClass = JSON.stringify(e.detail.value) }}></IonInput>
+                        <IonInput onIonChange={(e) => { note = e.detail.value }}></IonInput>
                     </IonItem>
                     <IonButton onClick={addNote}>Add Note</IonButton>
                 </IonList>

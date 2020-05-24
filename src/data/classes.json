@@ -2,7 +2,8 @@
     "classes": [
         {
             "name":"MATH101",
-            "desc":"Introduction to Calculus"
+            "desc":"Introduction to Calculus",
+            "instructor": "teacher@gmail.com"
         },
         {
             "name":"PHYS101",
@@ -14,7 +15,8 @@
         },
         {
             "name":"MATH102",
-            "desc":"Calculus II"
+            "desc":"Calculus II",
+            "instructor": "teacher@gmail.com"
         }
     ]
 }

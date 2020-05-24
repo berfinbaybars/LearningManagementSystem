@@ -1,10 +1,9 @@
-import { IonCard, IonIcon,IonButton, IonGrid, IonRow, IonCol, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent ,IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import { IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent ,IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import React from 'react';
 import { useParams } from 'react-router';
 import Announcements from '../components/Announcements';
 import Notification from '../components/Notification';
 import './Page.css';
-import { heartOutline } from 'ionicons/icons';
 import Notes from '../components/Notes';
 import Classes from '../components/Classes';
 import Lessons from '../components/Lessons'
