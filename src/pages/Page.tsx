@@ -37,9 +37,6 @@ const Page: React.FC = () => {
           </IonToolbar>
         </IonHeader>
         <Announcements />
-        <Announcements />
-        <Announcements />
-        <Announcements />
       </IonContent>
     </IonPage>
     );

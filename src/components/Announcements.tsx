@@ -1,14 +1,14 @@
 import React from 'react';
 import { IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonContent } from '@ionic/react';
-import anns from '../data/announcements.json'
-
+import anns from '../data/anns'
 
 const Announcements: React.FC = () => {
-  
+  console.log(anns)
+
   return (
     <IonContent>
       {
-        anns.announcements.map(ann => {
+        anns.map(ann => {
           return(
             <IonCard>
               <IonCardHeader>

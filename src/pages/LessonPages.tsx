@@ -3,9 +3,7 @@ import { IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, Io
 import React, { useState } from 'react';
 import { useParams } from 'react-router';
 import './Page.css';
-import anns from '../data/announcements.json'
 import '../components/Login.css'
-import { Plugins } from '@capacitor/core'
 
 
 
@@ -13,7 +11,6 @@ const ClassPages: React.FC = () => {
 
     const { name } = useParams<{ name: string; }>();
     const [showModal, setShowModal] = useState(false)
-    let announcement:string
 
     
     return (
