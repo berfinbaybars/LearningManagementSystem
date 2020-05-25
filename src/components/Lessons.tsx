@@ -3,7 +3,6 @@ import { IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonContent, IonGr
 import { arrowForwardCircleOutline } from 'ionicons/icons';
 import classes from '../data/classes.json'
 import './Login.css';
-import users from '../data/users.json'
 import { Plugins } from '@capacitor/core'
 
 const { Storage } = Plugins
@@ -20,7 +19,6 @@ const Lessons: React.FC = () => {
 
     let announcement
     const [cl, setCl] = useState("")
-    const [arr,setArr]= useState([])
 
     const addAnn = (name) => {
         setShowModal(true)
@@ -35,14 +33,12 @@ const Lessons: React.FC = () => {
         let value = JSON.stringify(ret.value) 
         let announces = JSON.parse(JSON.parse(value));
         if(announces){
-            setArr(announces)
             announces.forEach(ann => {
                 if(ann.class === cl){
                     anns.push(ann)
                 }
             })
         }
-        console.log(arr)
         console.log(anns)
         let newAnn = {
             text:announcement,
