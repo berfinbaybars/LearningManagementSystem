@@ -13,7 +13,7 @@ import {
 
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import { alert, alertCircleOutline,libraryOutline, mailOutline, personCircleOutline, personAddOutline } from 'ionicons/icons';
+import { alert, alertCircleOutline,libraryOutline, mailOutline, personCircleOutline, personAddOutline,documentTextOutline } from 'ionicons/icons';
 import './Menu.css';
 
 interface AppPage {
@@ -64,12 +64,6 @@ if(logindata === "student"){
       mdIcon: alert
     },
     {
-      title: 'Notifications',
-      url: '/page/Notifications',
-      iosIcon: mailOutline,
-      mdIcon: mailOutline
-    },
-    {
       title: 'Classes',
       url: '/page/Classes',
       iosIcon: libraryOutline,
@@ -78,8 +72,8 @@ if(logindata === "student"){
     {
       title: 'Notes',
       url: '/page/Notes',
-      iosIcon: libraryOutline,
-      mdIcon: libraryOutline
+      iosIcon: documentTextOutline,
+      mdIcon: documentTextOutline
     },
   )
 }

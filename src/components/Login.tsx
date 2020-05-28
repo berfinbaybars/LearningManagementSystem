@@ -26,7 +26,7 @@ const check = async() => {
         
       }
       if(user.type === "student"){
-        window.location.href = "http://localhost:8100/page/Notifications"
+        window.location.href = "http://localhost:8100/page/Classes"
         console.log("Student Login")
       }
     }

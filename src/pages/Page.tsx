@@ -1,8 +1,7 @@
-import { IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent ,IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import { IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import React from 'react';
 import { useParams } from 'react-router';
 import Announcements from '../components/Announcements';
-import Notification from '../components/Notification';
 import './Page.css';
 import Notes from '../components/Notes';
 import Classes from '../components/Classes';
@@ -37,39 +36,6 @@ const Page: React.FC = () => {
           </IonToolbar>
         </IonHeader>
         <Announcements />
-      </IonContent>
-    </IonPage>
-    );
-  }
-  else if(name === 'Notifications'){
-    return (
-      <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonButtons slot="start">
-            <IonMenuButton />
-          </IonButtons>
-          <IonTitle>{name}</IonTitle>
-        </IonToolbar>
-      </IonHeader>
-
-      <IonContent>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">{name}</IonTitle>
-          </IonToolbar>
-        </IonHeader>
-        <Notification />
-        <IonCard>
-        <IonCardHeader>
-          <IonCardSubtitle>Homework</IonCardSubtitle>
-          <IonCardTitle>Math 101</IonCardTitle>
-        </IonCardHeader>
-
-        <IonCardContent>
-          Your homework is due to tomorrow!
-        </IonCardContent>
-      </IonCard>
       </IonContent>
     </IonPage>
     );

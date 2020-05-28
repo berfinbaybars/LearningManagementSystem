@@ -4,6 +4,8 @@ import React from 'react';
 import { IonApp, IonRouterOutlet, IonSplitPane } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import { Redirect, Route } from 'react-router-dom';
+import LoginPages from './pages/LoginPages';
+import LessonPages from './pages/LessonPages'
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -23,8 +25,7 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
-import LoginPages from './pages/LoginPages';
-import LessonPages from './pages/LessonPages'
+
 
 const App: React.FC = () => {
 

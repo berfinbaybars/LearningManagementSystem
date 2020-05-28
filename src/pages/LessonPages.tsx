@@ -1,5 +1,4 @@
-import { IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar, IonList, IonItem, IonModal, IonButton, 
-    IonLabel, IonInput, IonCard, IonCardContent, IonCardHeader, IonCardTitle} from '@ionic/react';
+import { IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar, IonButton} from '@ionic/react';
 import React, { useState } from 'react';
 import { useParams } from 'react-router';
 import './Page.css';

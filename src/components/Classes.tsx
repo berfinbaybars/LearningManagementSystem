@@ -1,5 +1,5 @@
 import React from 'react';
-import { IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonContent, IonGrid, IonRow, IonCol, IonIcon, IonFab, IonFabButton } from '@ionic/react';
+import { IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonContent, IonGrid, IonRow, IonCol, IonIcon, IonFab, IonFabButton, IonChip, IonHeader } from '@ionic/react';
 import { heartOutline,heart } from 'ionicons/icons';
 import classes from '../data/classes.json'
 import './Login.css';
@@ -12,9 +12,9 @@ const Classes: React.FC = () => {
                 {
                     classes.classes.map(cl => {
                         return(
-                            <IonCol size="6">
+                            <IonCol size="12">
                                 <IonCard>
-                                    <IonFab vertical="top" horizontal="end">
+                                    <IonFab id="favbtn" vertical="top" horizontal="end">
                                         <IonFabButton onClick={()=>{
                                             if(document.getElementById(cl.name)?.getAttribute("icon")===heart){
                                                 document.getElementById(cl.name)?.setAttribute("icon",heartOutline)
