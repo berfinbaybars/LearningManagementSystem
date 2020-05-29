@@ -3,20 +3,27 @@
         {
             "name":"MATH101",
             "desc":"Introduction to Calculus",
-            "instructor": "teacher@gmail.com"
+            "instructor": "teacher@gmail.com",
+            "ifFaved": false
         },
         {
             "name":"PHYS101",
-            "desc":"Introduction to Physics"
+            "desc":"Introduction to Physics",
+            "ifFaved": false
+
         },
         {
             "name":"CMPE150",
-            "desc":"Introduction to Computing"
+            "desc":"Introduction to Computing",
+            "ifFaved": false
+
         },
         {
             "name":"MATH102",
             "desc":"Calculus II",
-            "instructor": "teacher@gmail.com"
+            "instructor": "teacher@gmail.com",
+            "ifFaved": false
+
         }
     ]
 }

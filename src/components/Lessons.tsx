@@ -4,6 +4,9 @@ import { arrowForwardCircleOutline } from 'ionicons/icons';
 import classes from '../data/classes.json'
 import './Login.css';
 import { Plugins } from '@capacitor/core'
+import axios from 'axios'
+import {allFavs} from '../data/favs';
+import https from 'https'
 
 const { Storage } = Plugins
 
@@ -32,7 +35,7 @@ const Lessons: React.FC = () => {
         let ret = await Storage.get({ key: 'ann' })
         let value = JSON.stringify(ret.value) 
         let announces = JSON.parse(JSON.parse(value));
-        if(announces){
+        /* if(announces){
             announces.forEach(ann => {
                 if(ann.class === cl){
                     anns.push(ann)
@@ -62,7 +65,25 @@ const Lessons: React.FC = () => {
             }).then(()=>{
                 console.log('Added')
             })
-        }
+        } */
+        allFavs.map(fav => {
+            if(fav.cl === cl){
+                let data = {
+                    email: fav.email,
+                    class: cl,
+                    text: announcement
+                }
+                const instance = axios.create({
+                    httpsAgent: new https.Agent({rejectUnauthorized:false})
+                })
+                instance.post('http://localhost:3000/send',{data})
+                /* const agent = new https.Agent({rejectUnauthorized: false})
+                axios.post('https://localhost:3000/send',{data},{httpsAgent: agent}).then((res)=> {console.log("Sent")}) */
+
+            }
+        })
+        
+        
         
     }
     

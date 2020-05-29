@@ -5,7 +5,9 @@ const { Storage } = Plugins
 const email = sessionStorage.getItem('email')
 
 let favs = []
-  
+
+export const allFavs = []
+
 
 const getFavs = async() => {
     let ret = await Storage.get({ key: 'fav' })
@@ -19,21 +21,15 @@ const getFavs = async() => {
                 favs.push(f)
             }
         })
+        fav.map(f => {
+            allFavs.push(f)
+        })
     }
     console.log(favs)
 }
 
 getFavs()
 console.log(favs)
-export const userFavs = []
-
-
-favs.forEach(fav => {
-    if(fav.email === email) {
-        userFavs.push(fav)
-    }
-})
-
 
 export const setFavs = async(email,cl) => {
     let newFav = {
@@ -61,6 +57,7 @@ export const delFavs = async(email,cl) => {
                 console.log(favs)
             }
         })
+        Storage.set({key:'fav',value: JSON.stringify(favs)})
     }
 }
 
