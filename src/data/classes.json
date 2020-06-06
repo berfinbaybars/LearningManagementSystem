@@ -9,12 +9,14 @@
         {
             "name":"PHYS101",
             "desc":"Introduction to Physics",
+            "instructor": "",
             "ifFaved": false
 
         },
         {
             "name":"CMPE150",
             "desc":"Introduction to Computing",
+            "instructor": "",
             "ifFaved": false
 
         },
