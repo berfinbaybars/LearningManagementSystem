@@ -7,6 +7,7 @@ import { Plugins } from '@capacitor/core'
 import axios from 'axios'
 import {allFavs} from '../data/favs';
 import https from 'https'
+import { setAnns } from '../data/anns';
 
 const { Storage } = Plugins
 
@@ -18,7 +19,6 @@ const Lessons: React.FC = () => {
     const email = sessionStorage.getItem("email")
     const [showModal, setShowModal] = useState(false)
     
-    const anns = []
 
     let announcement
     const [cl, setCl] = useState("")
@@ -32,40 +32,9 @@ const Lessons: React.FC = () => {
     const addAnnouncement = async() => {
         setShowModal(false)
         console.log(cl)
-        let ret = await Storage.get({ key: 'ann' })
-        let value = JSON.stringify(ret.value) 
-        let announces = JSON.parse(JSON.parse(value));
-        /* if(announces){
-            announces.forEach(ann => {
-                if(ann.class === cl){
-                    anns.push(ann)
-                }
-            })
-        }
-        console.log(anns)
-        let newAnn = {
-            text:announcement,
-            class:cl
-        }
-        if(anns===null){
-            Storage.set({
-                key:'ann',
-                value: JSON.stringify([{
-                    text:announcement,
-                    class:cl
-                }])
-            }).then(()=>{
-                console.log('Added')
-            })
-        }else {
-            anns.push(newAnn)
-            Storage.set({
-            key:'ann',
-            value: JSON.stringify(anns)
-            }).then(()=>{
-                console.log('Added')
-            })
-        } */
+        
+        setAnns(announcement,cl);
+
         allFavs.map(fav => {
             if(fav.cl === cl){
                 let data = {
@@ -73,12 +42,13 @@ const Lessons: React.FC = () => {
                     class: cl,
                     text: announcement
                 }
+
                 const instance = axios.create({
                     httpsAgent: new https.Agent({rejectUnauthorized:false})
                 })
+                
                 instance.post('http://localhost:3000/send',{data})
-                /* const agent = new https.Agent({rejectUnauthorized: false})
-                axios.post('https://localhost:3000/send',{data},{httpsAgent: agent}).then((res)=> {console.log("Sent")}) */
+                
 
             }
         })

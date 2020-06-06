@@ -8,15 +8,15 @@ const Announcements: React.FC = () => {
   return (
     <IonContent>
       {
-        anns.map(ann => {
-          return(
-            <IonCard>
-              <IonCardHeader>
-                <IonCardTitle>{ann.class}</IonCardTitle>
-              </IonCardHeader>
-              <IonCardContent>{ann.text}</IonCardContent>
-            </IonCard>
-          )
+        anns.map((ann,i) => {
+              return(
+                <IonCard key={i}>
+                  <IonCardHeader>
+                    <IonCardTitle>{ann.cl}</IonCardTitle>
+                  </IonCardHeader>
+                  <IonCardContent>{ann.text}</IonCardContent>
+                </IonCard>
+              )
         })
       }
       
