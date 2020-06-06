@@ -1,5 +1,5 @@
-import React from 'react';
-import { IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonContent, IonGrid, IonRow, IonCol, IonIcon, IonFab, IonFabButton, IonChip, IonHeader, withIonLifeCycle, useIonViewDidEnter, useIonViewWillEnter } from '@ionic/react';
+import React, { useState } from 'react';
+import { IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonContent, IonGrid, IonRow, IonCol, IonIcon, IonFab, IonFabButton, IonChip, IonHeader, withIonLifeCycle, useIonViewDidEnter } from '@ionic/react';
 import { heartOutline,heart } from 'ionicons/icons';
 import classes from '../data/classes.json'
 import './Login.css';
@@ -8,16 +8,16 @@ import favs from '../data/favs'
 const email = sessionStorage.getItem("email")
 
 const Classes: React.FC = () => {
-    useIonViewWillEnter(()=> {
-        console.log("willenter")
-        classes.classes.map(cl=> {
-            favs.map(fav => {
-                if(fav.cl === cl.name){
-                    cl.ifFaved = true
-                }
-            })
+    classes.classes.map(cl=> {
+        favs.map(fav => {
+            //console.log(fav)
+            if(fav.cl === cl.name){
+                cl.ifFaved = true
+            }
         })
     })
+    
+  
     
   return (
     <IonContent>
@@ -25,7 +25,7 @@ const Classes: React.FC = () => {
             <IonRow>
                 {
                     classes.classes.map(cl => {
-                        console.log(cl)
+                        //console.log(cl)
                         if (cl.ifFaved){
                             return(
                                 <IonCol size="12">
@@ -78,4 +78,4 @@ const Classes: React.FC = () => {
   );
 };
 
-export default withIonLifeCycle(Classes) ;
+export default Classes ;
