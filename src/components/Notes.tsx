@@ -62,9 +62,9 @@ const Notes: React.FC = () => {
             <IonButton id="addButton" onClick={() => setShowModal(true)}>Add Note</IonButton>
             
             {   
-                notes.map(note => {
+                notes.map((note, i) => {
                     return(
-                        <IonCard >
+                        <IonCard key={i}>
                         <IonCardHeader>
                         <IonCardTitle>{note.class}</IonCardTitle>
                         </IonCardHeader>
