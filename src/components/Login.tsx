@@ -1,5 +1,5 @@
-import React from 'react';
-import { IonList, IonItem, IonLabel, IonInput, IonButton } from '@ionic/react';
+import React, { useState } from 'react';
+import { IonList, IonItem, IonLabel, IonInput, IonButton, IonToast } from '@ionic/react';
 import './Login.css';
 import { Plugins } from '@capacitor/core'
 
@@ -10,34 +10,39 @@ let email : any;
 let password : any;
 
 
-const check = async() => {
-  const ret = await Storage.get({ key: 'user' });
-  const value = JSON.stringify(ret.value) 
-  const users = JSON.parse(JSON.parse(value));
-  console.log(users)
-  users.forEach(user => {
-    if(user.email === email && user.password === password){
-      /* let tp = JSON.parse(user.type)
-      console.log(tp) */
-      sessionStorage.setItem("type",user.type);
-      sessionStorage.setItem("email", user.email);
-      if(user.type === "teacher"){
-        window.location.href = "http://localhost:8100/page/Lessons"
-        
-      }
-      if(user.type === "student"){
-        window.location.href = "http://localhost:8100/page/Classes"
-        console.log("Student Login")
-      }
-    }
-    else {
-      console.log("User is not found")
-    }
-  
-  })
-}
 
 const Login: React.FC = () => {
+  const [showToast1, setToast1] = useState(false)
+  const [logined, setLogined] = useState(false)
+  const check = async() => {
+    const ret = await Storage.get({ key: 'user' });
+    const value = JSON.stringify(ret.value) 
+    let users = JSON.parse(JSON.parse(value));
+    if(!users){
+      users= [{}]
+    }
+    console.log(users)
+    users.forEach(user => {
+      if(user.email === email && user.password === password){
+        setLogined(true)
+        /* let tp = JSON.parse(user.type)
+        console.log(tp) */
+        sessionStorage.setItem("type",user.type);
+        sessionStorage.setItem("email", user.email);
+        if(user.type === "teacher"){
+          window.location.href = "http://localhost:8100/page/Lessons"
+          
+        }
+        if(user.type === "student"){
+          window.location.href = "http://localhost:8100/page/Classes"
+          console.log("Student Login")
+        }
+      }
+    })
+    if(logined == false) {
+      setToast1(true)
+    }
+  }
   return (
     <IonList id="loginlist">
       <IonItem >
@@ -49,7 +54,16 @@ const Login: React.FC = () => {
         <IonInput type="password" onIonChange = {(e) => { password = e.detail.value }}></IonInput>
       </IonItem>
       <IonButton onClick={check}>Login</IonButton>
+      <IonToast
+        isOpen={showToast1}
+        onDidDismiss={() => setToast1(false)}
+        message="User not found"
+        duration={800}
+        position="top"
+        color="danger"
+      />
     </IonList>
+    
 );
 };
 
