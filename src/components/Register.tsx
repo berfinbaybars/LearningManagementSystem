@@ -1,5 +1,5 @@
-import React from 'react';
-import { IonList, IonItem, IonLabel, IonInput, IonButton, IonSelect, IonSelectOption } from '@ionic/react';
+import React,{useState} from 'react';
+import { IonList, IonItem, IonLabel, IonInput, IonButton, IonSelect, IonSelectOption, IonToast } from '@ionic/react';
 import { Plugins } from '@capacitor/core'
 import './Login.css';
 
@@ -9,6 +9,7 @@ const Register: React.FC = () => {
   let email: string;
   let password: string;
   let type: string;
+  const [showToast1, setToast1] = useState(false)
 
 
   const addUser = async () => {
@@ -30,7 +31,7 @@ const Register: React.FC = () => {
           type:type
         }])
       }).then(()=>{
-        console.log('Added')
+        setToast1(true)
       })
     }
     console.log(users)
@@ -40,10 +41,9 @@ const Register: React.FC = () => {
       key:'user',
       value: JSON.stringify(users)
     }).then(()=>{
-      console.log('Added')
+      setToast1(true)
+      window.location.href="http://localhost:8100/Login"
     })
-
-
   }
 
   return (
@@ -64,6 +64,14 @@ const Register: React.FC = () => {
         </IonSelect>
       </IonItem>
       <IonButton onClick={addUser}>Register</IonButton>
+      <IonToast
+        isOpen={showToast1}
+        onDidDismiss={() => setToast1(false)}
+        message="User added"
+        duration={800}
+        position="top"
+        color="success"
+      />
     </IonList>
   );
 };
