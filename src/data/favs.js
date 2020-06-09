@@ -15,7 +15,7 @@ const getFavs = async() => {
     let fav = JSON.parse(JSON.parse(value)); */
     let fav = JSON.parse(ret.value)
     if(fav){
-        console.log(fav)
+        //console.log(fav)
         fav.map(f => {
             if(f.email === email){
                 favs.push(f)
@@ -25,11 +25,11 @@ const getFavs = async() => {
             allFavs.push(f)
         })
     }
-    console.log(favs)
+    //console.log(favs)
 }
 
 getFavs()
-console.log(favs)
+//console.log(favs)
 
 export const setFavs = async(email,cl) => {
     let newFav = {

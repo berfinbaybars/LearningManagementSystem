@@ -11,10 +11,10 @@ const Page: React.FC = () => {
 
   let logindata = sessionStorage.getItem("type");
     if(!logindata){
-      console.log("Access denied")
+      //console.log("Access denied")
       window.location.href ="http://localhost:8100/Login"
     }
-    console.log("Access granted")
+    //console.log("Access granted")
 
   const { name } = useParams<{ name: string; }>();
   if(name === 'Announcements'){

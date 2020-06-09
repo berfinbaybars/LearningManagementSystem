@@ -21,7 +21,7 @@ const Login: React.FC = () => {
     if(!users){
       users= [{}]
     }
-    console.log(users)
+    //console.log(users)
     users.forEach(user => {
       if(user.email === email && user.password === password){
         setLogined(true)
@@ -39,7 +39,7 @@ const Login: React.FC = () => {
         }
       }
     })
-    if(logined == false) {
+    if(logined === false) {
       setToast1(true)
     }
   }

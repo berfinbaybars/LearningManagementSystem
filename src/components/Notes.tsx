@@ -16,7 +16,7 @@ const getNotes = async() => {
             }
         })
     }
-    console.log(notes)
+    //console.log(notes)
 }
 getNotes()
 
@@ -58,7 +58,7 @@ const Notes: React.FC = () => {
         }
         
     }
-    console.log(notes)
+    //console.log(notes)
     return (
         <IonContent>
             <IonButton id="addButton" onClick={() => setShowModal(true)}>Add Note</IonButton>

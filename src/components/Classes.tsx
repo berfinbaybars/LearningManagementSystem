@@ -24,11 +24,11 @@ const Classes: React.FC = () => {
         <IonGrid>
             <IonRow>
                 {
-                    classes.classes.map(cl => {
+                    classes.classes.map((cl,i) => {
                         //console.log(cl)
                         if (cl.ifFaved){
                             return(
-                                <IonCol size="12">
+                                <IonCol key={i} size="12">
                                     <IonCard>
                                         <IonFab id="favbtn" vertical="top" horizontal="end">
                                             <IonFabButton onClick={function(){
@@ -49,7 +49,7 @@ const Classes: React.FC = () => {
                         }
                         else {
                             return(
-                                <IonCol size="12">
+                                <IonCol key={i} size="12">
                                     <IonCard>
                                         <IonFab id="favbtn" vertical="top" horizontal="end">
                                             <IonFabButton onClick={function(){

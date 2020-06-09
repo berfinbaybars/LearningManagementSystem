@@ -12,10 +12,10 @@ export const getAnns = async() => {
     let value = JSON.stringify(ret.value) 
     let announces = JSON.parse(JSON.parse(value));
     if(announces){
-        console.log(announces)
+        //console.log(announces)
         announces.map(ann => {
             favs.map(fav => {
-                console.log(fav, ann)
+                //console.log(fav, ann)
                 if(ann.cl === fav.cl){
                     anns.push(ann)
                 }
@@ -42,7 +42,7 @@ export const setAnns = async(text,cl) => {
         allAnns.push(newAnn)
         Storage.set({key:'ann',value: JSON.stringify(allAnns)})
     }
-    console.log(anns)
+    //console.log(anns)
 }
 
 export default anns

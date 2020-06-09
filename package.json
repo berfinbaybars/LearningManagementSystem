@@ -1,5 +1,5 @@
 {
-  "name": "deneme",
+  "name": "pso",
   "version": "0.0.1",
   "private": true,
   "dependencies": {
@@ -53,5 +53,5 @@
   "devDependencies": {
     "@capacitor/cli": "2.0.1"
   },
-  "description": "An Ionic project"
+  "description": "Personal School Overview"
 }
