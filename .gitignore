@@ -5,6 +5,7 @@
 /mailer/node_modules
 /.pnp
 .pnp.js
+/android
 
 # testing
 /coverage
