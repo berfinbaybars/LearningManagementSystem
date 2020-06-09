@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonContent, IonGrid, IonRow, IonCol, IonIcon, IonFab, IonFabButton, IonButton, IonItem, IonList,IonLabel,IonInput,IonModal } from '@ionic/react';
+import { IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonContent, IonGrid, IonRow, IonCol, IonIcon, IonFab, IonFabButton, IonButton, IonItem, IonList,IonLabel,IonInput,IonModal, IonToast } from '@ionic/react';
 import { arrowForwardCircleOutline } from 'ionicons/icons';
 import classes from '../data/classes.json'
 import './Login.css';
@@ -18,6 +18,7 @@ const Lessons: React.FC = () => {
     }
     const email = sessionStorage.getItem("email")
     const [showModal, setShowModal] = useState(false)
+    const [showToast, setShowToast] = useState(false)
     
 
     let announcement
@@ -31,8 +32,8 @@ const Lessons: React.FC = () => {
 
     const addAnnouncement = async() => {
         setShowModal(false)
-        console.log(cl)
-        
+        //console.log(cl)
+        setShowToast(true)
         setAnns(announcement,cl);
 
         allFavs.map(fav => {
@@ -52,9 +53,6 @@ const Lessons: React.FC = () => {
 
             }
         })
-        
-        
-        
     }
     
     let userClasses:userClasses[] = []
@@ -92,15 +90,23 @@ const Lessons: React.FC = () => {
                 </IonRow>
             </IonGrid>
             <IonModal isOpen={showModal}>
-                    <IonButton color="danger" onClick={() => setShowModal(false)}>Close</IonButton>
-                    <IonList id="loginlist">
-                        <IonItem >
-                            <IonLabel position="floating">Announcement</IonLabel>
-                            <IonInput type="text" onIonChange={(e) => { announcement = e.detail.value }}></IonInput>
-                        </IonItem>
-                        <IonButton onClick={addAnnouncement}>Add Announcement</IonButton>
-                    </IonList>
-                </IonModal>
+                <IonButton color="danger" onClick={() => setShowModal(false)}>Close</IonButton>
+                <IonList id="loginlist">
+                    <IonItem >
+                        <IonLabel position="floating">Announcement</IonLabel>
+                        <IonInput type="text" onIonChange={(e) => { announcement = e.detail.value }}></IonInput>
+                    </IonItem>
+                    <IonButton onClick={addAnnouncement}>Add Announcement</IonButton>
+                </IonList>
+            </IonModal>
+            <IonToast
+                isOpen={showToast}
+                onDidDismiss={() => setShowToast(false)}
+                message="Announcement Added"
+                duration={800}
+                position="top"
+                color="success"
+            />
     </IonContent>
     );
 };
