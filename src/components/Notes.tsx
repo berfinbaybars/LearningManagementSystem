@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonContent, IonButton, IonModal, IonInput, IonList,IonItem, IonLabel } from '@ionic/react';
+import { IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonContent, IonButton, IonModal, IonInput, IonList,IonItem, IonLabel, IonToast } from '@ionic/react';
 import { Plugins } from '@capacitor/core'
 
 const { Storage } = Plugins
@@ -23,6 +23,8 @@ getNotes()
 
 const Notes: React.FC = () => {
     const [showModal, setShowModal] = useState(false)
+    const [showToast1, setToast1] = useState(false)
+
     let note
     let noteClass
     
@@ -42,7 +44,7 @@ const Notes: React.FC = () => {
                 class:noteClass
                 }])
             }).then(()=>{
-                console.log('Added')
+                setToast1(true)
             })
         }else {
             notes.push(data)
@@ -51,8 +53,8 @@ const Notes: React.FC = () => {
             key:'note',
             value: JSON.stringify(notes)
             }).then(()=>{
-                console.log('Added')
-        })
+                setToast1(true)
+            })
         }
         
     }
@@ -90,6 +92,14 @@ const Notes: React.FC = () => {
                     <IonButton onClick={addNote}>Add Note</IonButton>
                 </IonList>
             </IonModal>
+            <IonToast
+                isOpen={showToast1}
+                onDidDismiss={() => setToast1(false)}
+                message="Note added"
+                duration={800}
+                position="top"
+                color="success"
+            />
         </IonContent>
         
         
