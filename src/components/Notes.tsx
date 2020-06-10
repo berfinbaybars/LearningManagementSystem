@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonContent, IonButton, IonModal, IonInput, IonList,IonItem, IonLabel, IonToast } from '@ionic/react';
+import { IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonContent, IonButton, IonModal, IonInput, IonList,IonItem, IonLabel, IonToast, IonFab, IonFabButton, IonIcon } from '@ionic/react';
 import { Plugins } from '@capacitor/core'
+import { copy } from 'ionicons/icons';
 
-const { Storage } = Plugins
+const { Storage, Clipboard } = Plugins
 const email = sessionStorage.getItem("email");
 
 
@@ -34,7 +35,7 @@ class Notes extends React.Component<{},{notes: any, showModal: boolean, showToas
                 class:this.state.noteClass
                 }])
             }).then(()=>{
-                this.setState({showToast1:true})
+                this.setState({showToast1:false})
                 this.setState({showModal:false})
             })
         }else {
@@ -44,12 +45,20 @@ class Notes extends React.Component<{},{notes: any, showModal: boolean, showToas
             key:'note',
             value: JSON.stringify(this.state.notes)
             }).then(()=>{
-                this.setState({showToast1:true})
+                this.setState({showToast1:false})
                 this.setState({showModal:false})
 
             })
         }
         
+    }
+
+    copyNote = async(text) => {
+        Clipboard.write({
+            string:text
+        })
+        let res = await Clipboard.read()
+        console.log(res)
     }
 
     getNotes = async() => {
@@ -79,14 +88,19 @@ class Notes extends React.Component<{},{notes: any, showModal: boolean, showToas
                     this.state.notes.map((note, i) => {
                         return(
                             <IonCard key={i}>
-                            <IonCardHeader>
-                            <IonCardTitle>{note.class}</IonCardTitle>
-                            </IonCardHeader>
-                    
-                            <IonCardContent>
-                                {note.note}
-                            </IonCardContent>
-                        </IonCard>      
+                                <IonCardHeader>
+                                    <IonCardTitle>{note.class}</IonCardTitle>
+                                    <IonFab  vertical="top" horizontal="end" edge={false}>
+                                        <IonFabButton size="small" onClick={()=>this.copyNote(note.note)}>
+                                            <IonIcon icon={copy}></IonIcon>
+                                        </IonFabButton>
+                                    </IonFab>
+                                </IonCardHeader>
+                        
+                                <IonCardContent>
+                                    {note.note}
+                                </IonCardContent>
+                            </IonCard>      
                         )
                     })
                 }
