@@ -1,28 +1,80 @@
-import React from 'react';
-import { IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonContent } from '@ionic/react';
-import anns from '../data/anns'
+import React, { useState } from 'react';
+import { IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonContent, withIonLifeCycle } from '@ionic/react';
+import { Plugins } from '@capacitor/core'
 
-const Announcements: React.FC = () => {
-  console.log(anns)
+const { Storage } = Plugins
+const email = sessionStorage.getItem('email')
 
-  return (
-    <IonContent>
-      {
-        anns.map((ann,i) => {
-              return(
-                <IonCard key={i}>
-                  <IonCardHeader>
-                    <IonCardTitle>{ann.cl}</IonCardTitle>
-                  </IonCardHeader>
-                  <IonCardContent>{ann.text}</IonCardContent>
-                </IonCard>
-              )
+
+class Announcements extends React.Component<{},{anns: any}> {
+  constructor(props){
+    super(props)
+    this.state = {
+      anns: []
+    }
+  }
+  favs = []
+  getFavs = async() => {
+    let ret = await Storage.get({ key: 'fav' })
+    /* let value = JSON.stringify(ret.value) 
+    let fav = JSON.parse(JSON.parse(value)); */
+    let fav = JSON.parse(ret.value)
+    if(fav){
+        //console.log(fav)
+        fav.map(f => {
+            if(f.email === email){
+                this.favs.push(f)
+            }
         })
-      }
-      
-    </IonContent>
+    }
+    //console.log(favs)
+  }
+
+  getAnns = async() => {
+    let ret = await Storage.get({ key: 'ann' })
+    let value = JSON.stringify(ret.value) 
+    let announces = JSON.parse(JSON.parse(value));
+    let data = []
+    if(announces){
+        //console.log(announces)
+        announces.map(ann => {
+            this.favs.map(fav => {
+                //console.log(fav, ann)
+                if(ann.cl === fav.cl){
+                    data.push(ann)
+                }
+            })
+        })
+    }
+    this.setState({anns: data })
+  }
+
+  componentWillMount (){
+    this.getFavs()
+    this.getAnns()
+  }
+
+  
+  render(){
+    return (
+      <IonContent>
+        {
+          this.state.anns.map((ann,i) => {
+                return(
+                  <IonCard key={i}>
+                    <IonCardHeader>
+                      <IonCardTitle>{ann.cl}</IonCardTitle>
+                    </IonCardHeader>
+                    <IonCardContent>{ann.text}</IonCardContent>
+                  </IonCard>
+                )
+          })
+        }
         
-  );
+      </IonContent>
+          
+    );
+  }
 };
 
-export default Announcements;
+export default withIonLifeCycle(Announcements);

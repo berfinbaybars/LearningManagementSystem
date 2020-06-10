@@ -3,107 +3,121 @@ import { IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonContent, IonBu
 import { Plugins } from '@capacitor/core'
 
 const { Storage } = Plugins
-const notes = []
 const email = sessionStorage.getItem("email");
-const getNotes = async() => {
-    let ret = await Storage.get({ key: 'note' })
-    let value = JSON.stringify(ret.value) 
-    let nts = JSON.parse(JSON.parse(value));
-    if(nts){
-        nts.forEach(note => {
-            if(note.email === email){
-                notes.push(note)
-            }
-        })
+
+
+
+class Notes extends React.Component<{},{notes: any, showModal: boolean, showToast1: boolean, note:any, noteClass:any}> {
+    constructor(props){
+        super(props)
+        this.state = {
+          notes:[],
+          showModal:false,
+          showToast1:false,
+          note:'',
+          noteClass:'',
+        }
     }
-    //console.log(notes)
-}
-getNotes()
 
-
-const Notes: React.FC = () => {
-    const [showModal, setShowModal] = useState(false)
-    const [showToast1, setToast1] = useState(false)
-
-    let note
-    let noteClass
-    
-    const addNote = async() => {
-        setShowModal(false);
+    addNote = async() => {
         let data = {
             email,
-            note:note,
-            class: noteClass
+            note:this.state.note,
+            class:this.state.noteClass
         }
-        if(notes===null){
+        if(this.state.notes===null){
             Storage.set({
                 key:'note',
                 value: JSON.stringify([{
                 email:email,
-                note:note,
-                class:noteClass
+                note:this.state.note,
+                class:this.state.noteClass
                 }])
             }).then(()=>{
-                setToast1(true)
+                this.setState({showToast1:true})
+                this.setState({showModal:false})
             })
         }else {
-            notes.push(data)
+            this.state.notes.push(data)
 
             Storage.set({
             key:'note',
-            value: JSON.stringify(notes)
+            value: JSON.stringify(this.state.notes)
             }).then(()=>{
-                setToast1(true)
+                this.setState({showToast1:true})
+                this.setState({showModal:false})
+
             })
         }
         
     }
-    //console.log(notes)
-    return (
-        <IonContent>
-            <IonButton id="addButton" onClick={() => setShowModal(true)}>Add Note</IonButton>
-            
-            {   
-                notes.map((note, i) => {
-                    return(
-                        <IonCard key={i}>
-                        <IonCardHeader>
-                        <IonCardTitle>{note.class}</IonCardTitle>
-                        </IonCardHeader>
+
+    getNotes = async() => {
+        let ret = await Storage.get({ key: 'note' })
+        let value = JSON.stringify(ret.value) 
+        let nts = JSON.parse(JSON.parse(value));
+        let data = []
+        if(nts){
+            nts.forEach(note => {
+                if(note.email === email){
+                    data.push(note)
+                }
+            })
+        }
+        this.setState({notes:data})
+        //console.log(notes)
+    }
+    componentWillMount(){
+        this.getNotes()
+    }
+    render(){
+        return (
+            <IonContent>
+                <IonButton id="addButton" onClick={() => this.setState({showModal:true})}>Add Note</IonButton>
                 
-                        <IonCardContent>
-                            {note.note}
-                        </IonCardContent>
-                    </IonCard>      
-                    )
-                })
-            }
-            <IonModal isOpen={showModal}>
-                <IonButton color="danger" onClick={() => setShowModal(false)}>Close</IonButton>
-                <IonList id="loginlist">
-                    <IonItem >
-                        <IonLabel position="floating">Class</IonLabel>
-                        <IonInput type="text" onIonChange={(e) => { noteClass = e.detail.value }}></IonInput>
-                    </IonItem>
-                    <IonItem>
-                        <IonLabel position="floating">Note</IonLabel>
-                        <IonInput onIonChange={(e) => { note = e.detail.value }}></IonInput>
-                    </IonItem>
-                    <IonButton onClick={addNote}>Add Note</IonButton>
-                </IonList>
-            </IonModal>
-            <IonToast
-                isOpen={showToast1}
-                onDidDismiss={() => setToast1(false)}
-                message="Note added"
-                duration={800}
-                position="top"
-                color="success"
-            />
-        </IonContent>
-        
-        
-    )
+                {   
+                    this.state.notes.map((note, i) => {
+                        return(
+                            <IonCard key={i}>
+                            <IonCardHeader>
+                            <IonCardTitle>{note.class}</IonCardTitle>
+                            </IonCardHeader>
+                    
+                            <IonCardContent>
+                                {note.note}
+                            </IonCardContent>
+                        </IonCard>      
+                        )
+                    })
+                }
+                <IonModal isOpen={this.state.showModal}>
+                    <IonButton color="danger" onClick={() => this.setState({showModal:true})}>Close</IonButton>
+                    <IonList id="loginlist">
+                        <IonItem >
+                            <IonLabel position="floating">Class</IonLabel>
+                            <IonInput type="text" onIonChange={(e) => { this.setState({noteClass: e.detail.value}) }}></IonInput>
+                        </IonItem>
+                        <IonItem>
+                            <IonLabel position="floating">Note</IonLabel>
+                            <IonInput onIonChange={(e) => { this.setState({note: e.detail.value}) }}></IonInput>
+                        </IonItem>
+                        <IonButton onClick={this.addNote}>Add Note</IonButton>
+                    </IonList>
+                </IonModal>
+                <IonToast
+                    isOpen={this.state.showToast1}
+                    onDidDismiss={() => this.setState({showToast1:false})}
+                    message="Note added"
+                    duration={800}
+                    position="top"
+                    color="success"
+                />
+            </IonContent>
+            
+            
+        )
+    }
+    
   
 };
 

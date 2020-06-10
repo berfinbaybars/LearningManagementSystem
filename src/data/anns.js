@@ -26,7 +26,6 @@ export const getAnns = async() => {
     
 }
 getAnns()
-
 export const setAnns = async(text,cl) => {
     let newAnn = {
         text,
