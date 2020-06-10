@@ -14,6 +14,7 @@ let password : any;
 const Login: React.FC = () => {
   const [showToast1, setToast1] = useState(false)
   const [logined, setLogined] = useState(false)
+  
   const check = async() => {
     const ret = await Storage.get({ key: 'user' });
     const value = JSON.stringify(ret.value) 
@@ -25,8 +26,7 @@ const Login: React.FC = () => {
     users.forEach(user => {
       if(user.email === email && user.password === password){
         setLogined(true)
-        /* let tp = JSON.parse(user.type)
-        console.log(tp) */
+        //console.log(logined)
         sessionStorage.setItem("type",user.type);
         sessionStorage.setItem("email", user.email);
         if(user.type === "teacher"){

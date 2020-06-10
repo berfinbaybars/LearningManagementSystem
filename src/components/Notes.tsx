@@ -108,8 +108,8 @@ class Notes extends React.Component<{},{notes: any, showModal: boolean, showToas
                     isOpen={this.state.showToast1}
                     onDidDismiss={() => this.setState({showToast1:false})}
                     message="Note added"
-                    duration={800}
-                    position="top"
+                    duration={1200}
+                    position="bottom"
                     color="success"
                 />
             </IonContent>

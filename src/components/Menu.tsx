@@ -9,6 +9,9 @@ import {
   IonMenuToggle,
   IonNote,
   IonButton,
+  IonGrid,
+  IonCol,
+  IonRow,
 } from '@ionic/react';
 
 import React from 'react';
@@ -103,7 +106,13 @@ const Menu: React.FC = () => {
             );
           })}
         </IonList>
-        <IonButton color="danger" onClick={logout} hidden={hide}>Logout</IonButton>
+        <IonGrid>
+          <IonRow>
+            <IonCol size="12" class="ion-text-center">
+              <IonButton size="default" expand="block" color="danger" id="logout_btn" onClick={logout} hidden={hide}>Logout</IonButton>
+            </IonCol>
+          </IonRow>
+        </IonGrid>
       </IonContent>
     </IonMenu>
   );

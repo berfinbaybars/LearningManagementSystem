@@ -33,8 +33,7 @@ const Register: React.FC = () => {
       }).then(()=>{
         setToast1(true)
       })
-    }
-    console.log(users)
+    }else{
     users.push(newUser)
 
     Storage.set({
@@ -44,6 +43,8 @@ const Register: React.FC = () => {
       setToast1(true)
       window.location.href="http://localhost:8100/Login"
     })
+    }
+    
   }
 
   return (
@@ -68,8 +69,8 @@ const Register: React.FC = () => {
         isOpen={showToast1}
         onDidDismiss={() => setToast1(false)}
         message="User added"
-        duration={800}
-        position="top"
+        duration={1200}
+        position="bottom"
         color="success"
       />
     </IonList>

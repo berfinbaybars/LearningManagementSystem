@@ -14,8 +14,15 @@
     margin: auto;
     margin-top: 15px;
     display: block;
+    margin-bottom: 15px;
 }
 
+#close-btn {
+    width: 100px;
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 0;
+}
 
 
 #addNoteList {

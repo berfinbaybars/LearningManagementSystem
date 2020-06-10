@@ -90,7 +90,7 @@ const Lessons: React.FC = () => {
                 </IonRow>
             </IonGrid>
             <IonModal isOpen={showModal}>
-                <IonButton color="danger" onClick={() => setShowModal(false)}>Close</IonButton>
+                <IonButton color="danger" id="close-btn" onClick={() => setShowModal(false)}>Close</IonButton>
                 <IonList id="loginlist">
                     <IonItem >
                         <IonLabel position="floating">Announcement</IonLabel>
@@ -103,8 +103,8 @@ const Lessons: React.FC = () => {
                 isOpen={showToast}
                 onDidDismiss={() => setShowToast(false)}
                 message="Announcement Added"
-                duration={800}
-                position="top"
+                duration={1200}
+                position="bottom"
                 color="success"
             />
     </IonContent>
