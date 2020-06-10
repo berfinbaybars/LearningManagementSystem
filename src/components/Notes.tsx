@@ -8,7 +8,7 @@ const email = sessionStorage.getItem("email");
 
 
 
-class Notes extends React.Component<{},{notes: any, showModal: boolean, showToast1: boolean, note:any, noteClass:any}> {
+class Notes extends React.Component<{},{notes: any, showModal: boolean, showToast1: boolean,showToast2: boolean, note:any, noteClass:any}> {
     constructor(props){
         super(props)
         this.state = {
@@ -17,6 +17,7 @@ class Notes extends React.Component<{},{notes: any, showModal: boolean, showToas
           showToast1:false,
           note:'',
           noteClass:'',
+          showToast2:false
         }
     }
 
@@ -35,20 +36,23 @@ class Notes extends React.Component<{},{notes: any, showModal: boolean, showToas
                 class:this.state.noteClass
                 }])
             }).then(()=>{
-                this.setState({showToast1:false})
+                this.setState({showToast1:true})
                 this.setState({showModal:false})
             })
         }else {
+            this.state.notes.reverse()
+            console.log(this.state.notes)
             this.state.notes.push(data)
-
+            console.log(this.state.notes)
             Storage.set({
             key:'note',
             value: JSON.stringify(this.state.notes)
             }).then(()=>{
-                this.setState({showToast1:false})
+                this.setState({showToast1:true})
                 this.setState({showModal:false})
 
             })
+            this.state.notes.reverse()
         }
         
     }
@@ -59,21 +63,24 @@ class Notes extends React.Component<{},{notes: any, showModal: boolean, showToas
         })
         let res = await Clipboard.read()
         console.log(res)
+        this.setState({showToast2:true})
     }
 
     getNotes = async() => {
         let ret = await Storage.get({ key: 'note' })
-        let value = JSON.stringify(ret.value) 
-        let nts = JSON.parse(JSON.parse(value));
-        let data = []
-        if(nts){
+        let value = ret.value
+        
+        if(value){
+            let nts = JSON.parse(value);
+            let data = []
             nts.forEach(note => {
                 if(note.email === email){
                     data.push(note)
                 }
             })
+            data.reverse()
+            this.setState({notes:data})
         }
-        this.setState({notes:data})
         //console.log(notes)
     }
     componentWillMount(){
@@ -105,7 +112,7 @@ class Notes extends React.Component<{},{notes: any, showModal: boolean, showToas
                     })
                 }
                 <IonModal isOpen={this.state.showModal}>
-                    <IonButton color="danger" onClick={() => this.setState({showModal:true})}>Close</IonButton>
+                    <IonButton color="danger" id="close-btn" onClick={() => this.setState({showModal:false})}>Close</IonButton>
                     <IonList id="loginlist">
                         <IonItem >
                             <IonLabel position="floating">Class</IonLabel>
@@ -122,6 +129,14 @@ class Notes extends React.Component<{},{notes: any, showModal: boolean, showToas
                     isOpen={this.state.showToast1}
                     onDidDismiss={() => this.setState({showToast1:false})}
                     message="Note added"
+                    duration={1200}
+                    position="bottom"
+                    color="success"
+                />
+                <IonToast
+                    isOpen={this.state.showToast2}
+                    onDidDismiss={() => this.setState({showToast2:false})}
+                    message="Copied"
                     duration={1200}
                     position="bottom"
                     color="success"

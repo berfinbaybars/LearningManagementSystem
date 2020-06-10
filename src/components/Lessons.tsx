@@ -69,7 +69,7 @@ const Lessons: React.FC = () => {
                     {
                         userClasses.map((cl,i) => {
                             return(
-                                <IonCol key={i} size="6">
+                                <IonCol key={i} size="12">
                                     <IonCard>
                                         <IonFab vertical="top" horizontal="end">
                                             <IonFabButton onClick={()=>addAnn(cl.name)}>

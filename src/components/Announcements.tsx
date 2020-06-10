@@ -46,6 +46,7 @@ class Announcements extends React.Component<{},{anns: any}> {
             })
         })
     }
+    data.reverse()
     this.setState({anns: data })
   }
 
